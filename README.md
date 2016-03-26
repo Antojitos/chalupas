@@ -25,7 +25,8 @@ or using [gunicorn](http://gunicorn.org/):
   Parameter   |    Type    | Required
 ------------- | ---------- | --------
   document    |    file    |   yes
-   format     |   string   |   yes
+  from        |   string   |   yes
+  to          |   string   |   yes
 
 #### Example
 
