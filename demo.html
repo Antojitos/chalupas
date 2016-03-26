@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <form action="http://10.0.3.72:5000/convert/" method="post" enctype="multipart/form-data">
+    <label for="from">from</label>
+    <select name="from" id="from">
+      <option value="html">html</option>
+      <option value="rst">rst</option>
+      <option value="md">md</option>
+      <option value="docx">docx</option>
+    </select>
+    <label for="to">to</label>
+    <select name="to" id="to">
+      <option value="html">html</option>
+      <option value="rst">rst</option>
+      <option value="md">md</option>
+      <option value="docx">docx</option>
+    </select>
+    <input type="file" name="document">
+    <button type="submit">Convert</button>
+  </form>
+</body>
+</html>
