@@ -38,6 +38,15 @@ or using [gunicorn](http://gunicorn.org/):
 
 file
 
+## Conversion Table
+
+|      | HTML | MD  | RST | DOCX |
+|------|------|-----|-----|------|
+| HTML | x    | yes | yes | yes  |
+| MD   | yes  | x   | yes | yes  |
+| RST  | yes  | yes | x   | yes  |
+| DOCX | yes  | yes | yes | x    |
+
 ## Tests
 
 `python setup.py test`
