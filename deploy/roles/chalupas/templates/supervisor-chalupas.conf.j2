@@ -1,0 +1,11 @@
+[program:chalupas]
+command = gunicorn -b {{ gunicorn_host }}:{{ gunicorn_port }} -w {{ gunicorn_workers }} chalupas:app
+environment = CONFIG="/etc/chalupas/config.py"
+directory = {{ chalupas_base_dir }}
+
+autostart = true
+autorestart = true
+
+redirect_stderr = False
+stdout_logfile = /var/log/supervisor/chalupas_stdout.log
+stderr_logfile = /var/log/supervisor/chalupas_stderr.log

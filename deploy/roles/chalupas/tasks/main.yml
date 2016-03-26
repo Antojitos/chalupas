@@ -1,0 +1,4 @@
+---
+- include: pandoc.yml
+- include: webserver.yml
+- include: webapp.yml

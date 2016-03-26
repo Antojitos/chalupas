@@ -1,0 +1,33 @@
+---
+# Install and configure application code
+
+- name: install supervisor
+  apt: name=supervisor state=present
+
+- name: install pip
+  apt: name=python-pip state=present
+
+- name: install virtualenv
+  apt: name=python-virtualenv state=present
+
+- name: install gunicorn
+  pip: name=gunicorn
+
+- name: install chalupas
+  pip: name='https://github.com/Antojitos/chalupas/archive/{{ chalupas_version }}.tar.gz'
+
+- name: create chalupas config directory
+  file: path=/etc/chalupas state=directory mode=0755
+
+- name: create chalupas data directory
+  file: path={{ chalupas_base_dir }} state=directory mode=0755
+
+- name: create chalupas files directory
+  file: path={{ chalupas_base_dir }}/files state=directory mode=0755
+
+- name: create configuration file for chalupas
+  template: src=chalupas-config.py.j2 dest=/etc/chalupas/config.py
+
+- name: create configuration file for supervisor
+  template: src=supervisor-chalupas.conf.j2 dest=/etc/supervisor/conf.d/chalupas.conf
+  notify: reload supervisor

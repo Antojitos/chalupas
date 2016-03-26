@@ -1,0 +1,11 @@
+---
+# Install and configure pandoc
+
+- name: install pandoc binary
+  apt: name=pandoc state=present
+
+- name: install latex
+  apt: name=texlive-full state=present
+
+- name: install lmodern
+  apt: name=lmodern state=present

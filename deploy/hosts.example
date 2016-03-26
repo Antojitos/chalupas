@@ -1,0 +1,5 @@
+[servers]
+web1.example.com
+
+[servers:vars]
+chalupas_server_name=chalupas.example.com

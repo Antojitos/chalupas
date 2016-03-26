@@ -1,0 +1,10 @@
+---
+# Variables listed here are applicable to all host groups
+
+chalupas_server_name: chalupas.example.com
+chalupas_version: master
+chalupas_base_dir: /var/lib/chalupas
+
+gunicorn_host: 127.0.0.1
+gunicorn_port: 8000
+gunicorn_workers: 4
