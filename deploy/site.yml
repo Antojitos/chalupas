@@ -1,0 +1,9 @@
+---
+# This playbook deploys the whole Chalupas stack.
+
+- name: configure and deploy web server and application code
+  hosts: servers
+  remote_user: root
+
+  roles:
+    - chalupas
