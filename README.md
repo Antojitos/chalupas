@@ -34,7 +34,7 @@ or using [gunicorn](http://gunicorn.org/):
 
 ##### Request
 
-`curl -F "file=@tests/fixtures/demo.docx" --form "from=docx" --form "to=html" 127.0.0.1:5000/convert/`
+`curl -F "document=@tests/fixtures/demo.docx" --form "from=docx" --form "to=html" 127.0.0.1:5000/convert/`
 
 ##### Response
 
