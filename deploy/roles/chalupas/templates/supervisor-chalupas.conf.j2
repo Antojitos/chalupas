@@ -1,6 +1,6 @@
 [program:chalupas]
 command = gunicorn -b {{ gunicorn_host }}:{{ gunicorn_port }} -w {{ gunicorn_workers }} chalupas:app
-environment = CONFIG="/etc/chalupas/config.py"
+environment = CONFIG="/etc/chalupas/config.py",HOME=/root
 directory = {{ chalupas_base_dir }}
 
 autostart = true
