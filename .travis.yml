@@ -1,0 +1,9 @@
+language: python
+python:
+  - "2.7"
+  - "3.4"
+install: "python setup.py install"
+script: "python setup.py test"
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y pandoc texlive-base lmodern
