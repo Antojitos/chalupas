@@ -1,4 +1,6 @@
-# chalupas ![Build Status](https://travis-ci.org/Antojitos/chalupas.svg?branch=master)
+# chalupas
+
+[![Build Status](https://travis-ci.org/Antojitos/chalupas.svg?branch=master)](https://travis-ci.org/Antojitos/chalupas)
 
 Convert any document.
 
