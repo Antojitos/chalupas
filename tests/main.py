@@ -45,7 +45,7 @@ class ChalupasTestCase(unittest.TestCase):
 
         assert '200' in response.status
         assert 'octet-stream' in response.content_type
-        assert magic.from_buffer(destination_document, mime=True) == 'text/x-c++'
+        self.assertEqual(magic.from_buffer(destination_document, mime=True), 'text/x-c++')
         assert os.listdir(app.config['CONVERSION_FOLDER']) == []
 
     def test_html_to_rst(self):
@@ -87,7 +87,7 @@ class ChalupasTestCase(unittest.TestCase):
 
         assert '200' in response.status
         assert 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' in response.content_type
-        assert magic.from_buffer(destination_document, mime=True) == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        self.assertEqual(magic.from_buffer(destination_document, mime=True), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
         assert os.listdir(app.config['CONVERSION_FOLDER']) == []
 
     #
