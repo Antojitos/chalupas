@@ -32,5 +32,8 @@ setup(
         'pypandoc==1.1.3'
     ],
 
+    tests_require=[
+        'python-magic==0.4.11',
+    ],
     test_suite='tests.main'
 )
