@@ -9,7 +9,7 @@ class Document(object):
 
     def __init__(self, file):
         self.file_name=file.filename
-        self.file_directory = app.config['CONVERSION_FOLDER']
+        self.file_directory=app.config['CONVERSION_FOLDER']
         self.converted_file_directory=app.config['CONVERSION_FOLDER']
 
         save_file_to_disk(
