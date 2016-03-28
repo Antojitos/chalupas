@@ -18,23 +18,29 @@ or using [gunicorn](http://gunicorn.org/):
 
 ## API
 
-### Post a file
+### Convert a document
 
 #### Endpoint
 
 `POST /convert/`
 
-  Parameter   |    Type    | Required
-------------- | ---------- | --------
-  document    |    file    |   yes
-  from        |   string   |   yes
-  to          |   string   |   yes
+  Parameter   |          Type        | Required
+------------- | -------------------- | --------
+  document    |    file  or string   |   yes
+  from        |        string        |   yes
+  to          |        string        |   yes
 
-#### Example
+#### Examples
 
 ##### Request
 
+- From file
+
 `curl -F "document=@tests/fixtures/demo.docx" --form "from=docx" --form "to=html" 127.0.0.1:5000/convert/`
+
+- From string
+
+`curl -F "document=#This is a test" --form "from=md" --form "to=docx" 127.0.0.1:5000/convert/`
 
 ##### Response
 

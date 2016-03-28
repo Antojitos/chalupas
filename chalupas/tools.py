@@ -1,7 +1,8 @@
-
 import os
 import hashlib
 import mimetypes
+import random
+import string
 
 from chalupas import app
 
@@ -9,20 +10,11 @@ def get_mimetype(file_path):
     mimetypes.init()
     return mimetypes.guess_type(file_path)[0]
 
-def rewind_file(file):
-    file.seek(0, os.SEEK_END)
-
 def reset_file(file):
     file.stream.seek(0)
 
-def hash_file(file):
-    hasher = hashlib.md5()
-    with open('myfile.jpg', 'rb') as afile:
-        buf = afile.read()
-        hasher.update(buf)
-
-    rewind_file(file)
-    return hasher.hexdigest()
+def random_string(size=12):
+    return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(size))
 
 def save_file_to_disk(file, file_path):
     file_folder = os.path.dirname(file_path)
@@ -30,7 +22,6 @@ def save_file_to_disk(file, file_path):
     if not os.path.exists(file_folder):
         os.makedirs(file_folder)
 
-    # import ipdb; ipdb.set_trace()
     reset_file(file)
     file.save(file_path)
 

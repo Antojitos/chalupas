@@ -15,10 +15,13 @@ class ChalupasTestCase(unittest.TestCase):
 
         self.app = chalupas.app.test_client()
 
-    def set_original_document(self, file_name):
+    def set_original_document_from_file(self, file_name):
         self.original_document_name = file_name
         self.original_document_path = os.path.join('tests/fixtures', self.original_document_name)
         self.original_document = open(self.original_document_path, 'r')
+
+    def set_original_document_from_string(self, content_string):
+        self.original_document_content_string = content_string
 
     def tearDown(self):
         pass
@@ -30,7 +33,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_html_to_md(self):
         """HTML to MD"""
 
-        self.set_original_document('demo.html')
+        self.set_original_document_from_file('demo.html')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -51,7 +54,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_html_to_rst(self):
         """HTML to RST"""
 
-        self.set_original_document('demo.html')
+        self.set_original_document_from_file('demo.html')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -72,7 +75,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_html_to_docx(self):
         """HTML to DOCX"""
 
-        self.set_original_document('demo.html')
+        self.set_original_document_from_file('demo.html')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -97,7 +100,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_md_to_html(self):
         """MD to HTML"""
 
-        self.set_original_document('demo.md')
+        self.set_original_document_from_file('demo.md')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -118,7 +121,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_md_to_rst(self):
         """HTML to RST"""
 
-        self.set_original_document('demo.md')
+        self.set_original_document_from_file('demo.md')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -139,7 +142,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_md_to_docx(self):
         """HTML to DOCX"""
 
-        self.set_original_document('demo.md')
+        self.set_original_document_from_file('demo.md')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -164,7 +167,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_rst_to_html(self):
         """RST to HTML"""
 
-        self.set_original_document('demo.rst')
+        self.set_original_document_from_file('demo.rst')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -185,7 +188,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_rst_to_md(self):
         """RST to MD"""
 
-        self.set_original_document('demo.rst')
+        self.set_original_document_from_file('demo.rst')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -207,7 +210,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_rst_to_docx(self):
         """RST to DOCX"""
 
-        self.set_original_document('demo.rst')
+        self.set_original_document_from_file('demo.rst')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -232,7 +235,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_docx_to_html(self):
         """DOCX to HTML"""
 
-        self.set_original_document('demo.docx')
+        self.set_original_document_from_file('demo.docx')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -254,7 +257,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_rst_to_html(self):
         """RST to HTML"""
 
-        self.set_original_document('demo.rst')
+        self.set_original_document_from_file('demo.rst')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -275,7 +278,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_docx_to_md(self):
         """DOCX to MD"""
 
-        self.set_original_document('demo.docx')
+        self.set_original_document_from_file('demo.docx')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -296,7 +299,7 @@ class ChalupasTestCase(unittest.TestCase):
     def test_docx_to_rst(self):
         """DOCX to RST"""
 
-        self.set_original_document('demo.docx')
+        self.set_original_document_from_file('demo.docx')
 
         response = self.app.post('/convert/',
                 buffered=True,
@@ -304,6 +307,27 @@ class ChalupasTestCase(unittest.TestCase):
                 data={
                     'document': (self.original_document, self.original_document_name),
                     'from': 'docx',
+                    'to': 'rst'
+                })
+
+        destination_document = response.data
+
+        assert '200' in response.status
+        assert 'octet-stream' in response.content_type
+        assert magic.from_buffer(destination_document, mime=True) == 'text/plain'
+        assert os.listdir(app.config['CONVERSION_FOLDER']) == []
+
+    def test_convert_from_string(self):
+        """Convert from string"""
+
+        self.set_original_document_from_string('#1')
+
+        response = self.app.post('/convert/',
+                buffered=True,
+                content_type='multipart/form-data',
+                data={
+                    'document': self.original_document_content_string,
+                    'from': 'md',
                     'to': 'rst'
                 })
 
