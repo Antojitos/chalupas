@@ -28,7 +28,7 @@ setup(
 
     packages=['chalupas'],
     install_requires=[
-        'Flask==0.10.1',
+        'Flask==0.12.3',
         'pypandoc==1.1.3'
     ],
 
