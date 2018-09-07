@@ -6,14 +6,14 @@ with open('README.md') as file:
 
 setup(
     name="chalupas-files",
-    version="0.1.0",
+    version="0.1.1",
     author="Antonin Messinger",
     author_email="antonin.messinger@gmail.com",
     description=" Convert any document",
     long_description=long_description,
     license="MIT License",
     url="https://github.com/Antojitos/chalupas",
-    download_url="https://github.com/Antojitos/chalupas/archive/0.1.0.tar.gz",
+    download_url="https://github.com/Antojitos/chalupas/archive/0.1.1.tar.gz",
     keywords=["chalupas", "convert", "document"],
     classifiers=[
         'Development Status :: 4 - Beta',
