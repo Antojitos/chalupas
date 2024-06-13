@@ -1,8 +1,21 @@
 ---
 # Install and configure pandoc
 
-- name: install pandoc binary
+- name: install ca-certificates
+  apt: name=ca-certificates state=present
+  when: ansible_architecture == 'x86_64'
+
+- name: download pandoc debian package
+  get_url: url=https://github.com/jgm/pandoc/releases/download/1.13.2/pandoc-1.13.2-1-amd64.deb dest=/tmp/pandoc-1.13.2-1-amd64.deb mode=0440
+  when: ansible_architecture == 'x86_64'
+
+- name: install pandoc via .deb file
+  apt: deb=/tmp/pandoc-1.13.2-1-amd64.deb
+  when: ansible_architecture == 'x86_64'
+
+- name: install pandoc via apt-get
   apt: name=pandoc state=present
+  when: not ansible_architecture == 'x86_64'
 
 - name: install latex
   apt: name=texlive-full state=present
